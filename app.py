@@ -1,28 +1,40 @@
+import subprocess
+import cv2
 import numpy as np
-from tensorflow.keras.models import load_model
+import tensorflow as tf
 from preprocessing.process_image import preprocess_image
 
-# Load the trained model
-model = load_model("models/cnn_model.h5")
+MODEL_PATH = "models/cnn_model.h5"
 
-# Predict function with confidence filtering
-def predict_digit(image_path):
-    img = preprocess_image(image_path)
-    predictions = model.predict(img)[0]  # Get prediction array
-    top_3_indices = np.argsort(predictions)[-3:][::-1]  # Get top 3 predictions
-    top_3_confidences = predictions[top_3_indices] * 100  # Convert to percentages
+def load_model():
+    return tf.keras.models.load_model(MODEL_PATH)
+
+def predict_digit(image_path, model):
+    # Preprocess the image
+    processed_image = preprocess_image(image_path)  # Should return a NumPy array
+
+    # Get prediction probabilities
+    predictions = model.predict(processed_image)  # Returns an array of probabilities for each digit (0-9)
+
+    predicted_digit = np.argmax(predictions)  # Get the digit with the highest probability
+    confidence = np.max(predictions)  # Get the confidence for the prediction
+
+    return predicted_digit, confidence
+
+if __name__ == "__main__":
+    print("Launching digit drawing interface...")
     
-    # Keep the main prediction and any additional predictions with confidence > 5%
-    filtered_predictions = [(top_3_indices[0], top_3_confidences[0])]
-    for i in range(1, len(top_3_indices)):
-        if top_3_confidences[i] > 5:
-            filtered_predictions.append((top_3_indices[i], top_3_confidences[i]))
+    # Run draw_digit.py as a subprocess
+    subprocess.run(["python3", "drawing_interface/draw_digit.py"])
     
-    return filtered_predictions
+    IMAGE_PATH = "test_images/drawn_digit.png"  # Ensure the image is saved as "drawn_digit.png"
+    
+    # Load model
+    model = load_model()
 
-image_path = "drawing_interface/test_images/drawn_digit.png"
-predictions = predict_digit(image_path)
+    # Predict the digit
+    predicted_digit, confidence = predict_digit(IMAGE_PATH, model)
 
-print("Predictions:")
-for rank, (digit, confidence) in enumerate(predictions, 1):
-    print(f"{rank}. {digit} ({confidence:.2f}%)")
+    # Display results
+    print(f"Predicted Digit: {predicted_digit}")
+    print(f"Confidence: {confidence * 100:.2f}%")  # Converted to percentage format

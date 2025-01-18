@@ -14,7 +14,7 @@ def draw(event, x, y, flags, param):
         last_x, last_y = x, y
     elif event == cv2.EVENT_MOUSEMOVE:
         if drawing and last_x is not None and last_y is not None:
-            cv2.line(canvas, (last_x, last_y), (x, y), (0, 0, 0), thickness=15)  # Draw smoother lines
+            cv2.line(canvas, (last_x, last_y), (x, y), (0, 0, 0), thickness=15)  # Draw smooth lines
             last_x, last_y = x, y
     elif event == cv2.EVENT_LBUTTONUP:
         drawing = False
