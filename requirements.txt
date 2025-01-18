@@ -1,6 +1,4 @@
-flask
 tensorflow
 numpy
 opencv-python
 pillow
-gunicorn
