@@ -31,7 +31,13 @@ python3 app.py
 - Press 's' to classify the digit. (Or 'q' to quit)
 - The program will print the recognized digit and confidence score.
 
-## Project Structure
+## Example Output
+```
+Predicted Digit: 3
+Confidence: 98.75%
+```
+
+## 📜 Project Structure
 ```
 handwritten_digit_recognition/
 │── app.py               # Main application script
@@ -43,13 +49,7 @@ handwritten_digit_recognition/
 │── README.md            # Project documentation
 ```
 
-## Example Output
-```
-Predicted Digit: 3
-Confidence: 98.75%
-```
-
-## Model Details
+## ⚙️ Model Details
 - **Architecture:** Convolutional Neural Network (CNN)
 - **Dataset:** Trained on the MNIST dataset (28x28 grayscale images)
 
