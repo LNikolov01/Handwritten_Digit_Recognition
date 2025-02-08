@@ -13,7 +13,7 @@ A deep learning-powered handwritten digit recognition system that allows users t
 ### 1️⃣ Clone the Repository
 ```bash
 git clone https://github.com/LNikolov01/handwritten_digit_recognition.git
-cd Handwritten_Digit_Recognition
+cd handwritten_digit_recognition
 ```
 
 ### 2️⃣ Install Dependencies
