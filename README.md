@@ -82,9 +82,9 @@ weighted avg       0.99      0.99      0.99     10000
 ### 📈 Training Performance Graphs
 Below are the training accuracy and loss plots:
 
-![Loss and Accuracy Plots](loss_accuracy_graph.png)
+![Loss and Accuracy Plots](models/loss_accuracy_graph.png)
 
-## 📜 Model Configuration (YAML)
+## 📜 Model Configuration
 ```yaml
 model:
   type: "CNN"
