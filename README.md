@@ -33,7 +33,7 @@ python3 app.py
 
 ## Project Structure
 ```
-Handwritten_Digit_Recognition/
+handwritten_digit_recognition/
 │── app.py               # Main application script
 │── train_model.py       # Model training script
 │── draw_digit.py        # Allows users to draw digits
