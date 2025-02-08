@@ -80,7 +80,7 @@ weighted avg       0.99      0.99      0.99     10000
 ```
 
 ### 📈 Training Performance Graphs
-Below are the training accuracy and loss plots:
+Below are the training accuracy and loss plots of the model:
 
 ![Loss and Accuracy Plots](models/loss_accuracy_graph.png)
 
@@ -89,12 +89,17 @@ Below are the training accuracy and loss plots:
 model:
   type: "CNN"
   layers:
-    - Conv2D: {filters: 32, kernel_size: [3,3], activation: "relu"}
+    - Conv2D: {filters: 32, kernel_size: [3,3], activation: "relu", input_shape: [28, 28, 1]}
     - MaxPooling2D: {pool_size: [2,2]}
+    - BatchNormalization: {}
     - Conv2D: {filters: 64, kernel_size: [3,3], activation: "relu"}
     - MaxPooling2D: {pool_size: [2,2]}
+    - BatchNormalization: {}
+    - Conv2D: {filters: 128, kernel_size: [3,3], activation: "relu"}
+    - BatchNormalization: {}
     - Flatten: {}
-    - Dense: {units: 128, activation: "relu"}
+    - Dense: {units: 256, activation: "relu"}
+    - Dropout: {rate: 0.5}
     - Dense: {units: 10, activation: "softmax"}
 training:
   epochs: 12
@@ -107,6 +112,7 @@ dataset:
 ```
 
 ## Planned Future Improvements
+- ✅ Data augmentation to improve generalization
+- ✅ Model training script for custom datasets
 - ✅ Web-based interface with Flask
 - ✅ Deployment as a web app
-- ✅ Model training script for custom datasets
