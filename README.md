@@ -53,6 +53,59 @@ Confidence: 98.75%
 - **Architecture:** Convolutional Neural Network (CNN)
 - **Dataset:** Trained on the MNIST dataset (28x28 grayscale images)
 
+## 📊 Model Performance
+
+### ✅ Test Accuracy & Loss
+- **Test Accuracy:** 99.17%  
+- **Test Loss:** 0.0422  
+
+### 📜 Classification Report:
+```
+              precision    recall  f1-score   support
+
+           0       1.00      0.99      0.99       980
+           1       1.00      1.00      1.00      1135
+           2       1.00      0.98      0.99      1032
+           3       1.00      0.99      0.99      1010
+           4       0.99      1.00      0.99       982
+           5       0.99      0.99      0.99       892
+           6       0.99      0.99      0.99       958
+           7       0.97      1.00      0.98      1028
+           8       1.00      0.99      0.99       974
+           9       0.99      0.99      0.99      1009
+
+    accuracy                           0.99     10000
+   macro avg       0.99      0.99      0.99     10000
+weighted avg       0.99      0.99      0.99     10000
+```
+
+### 📈 Training Performance Graphs
+Below are the training accuracy and loss plots:
+
+![Loss and Accuracy Plots](loss_accuracy_graph.png)
+
+## 📜 Model Configuration (YAML)
+```yaml
+model:
+  type: "CNN"
+  layers:
+    - Conv2D: {filters: 32, kernel_size: [3,3], activation: "relu"}
+    - MaxPooling2D: {pool_size: [2,2]}
+    - Conv2D: {filters: 64, kernel_size: [3,3], activation: "relu"}
+    - MaxPooling2D: {pool_size: [2,2]}
+    - Flatten: {}
+    - Dense: {units: 128, activation: "relu"}
+    - Dense: {units: 10, activation: "softmax"}
+training:
+  epochs: 12
+  batch_size: 32
+  optimizer: "adam"
+dataset:
+  name: "MNIST"
+  input_shape: [28, 28, 1]
+  classes: 10
+```
+
 ## Planned Future Improvements
 - ✅ Web-based interface with Flask
 - ✅ Deployment as a web app
